@@ -4,7 +4,6 @@ namespace WifiThief.Commands.Unix;
 
 public static class UnixCommands
 {
-    public const string GetWifiNameCommandMacos = "sudo wdutil info | grep 'SSID                 :'";
     public const string GetWifiNameCommandLinux = "iwgetid -r";
 
     public static string RunUnixCommand(string command)
