@@ -2,13 +2,13 @@ using System.Diagnostics;
 
 namespace WifiThief.Commands;
 
-public static class Commands
+public static class CommandUtilities
 {
     public const string GetWifiNameCommandMacos = "sudo wdutil info | grep 'SSID                 :'";
-    public const string GetWifiNameCommandWindows = "netsh wlan show interfaces | findstr 'SSID'";
+    public const string GetWifiNameCommandWindows = "netsh wlan show profiles";
     public const string GetWifiNameCommandLinux = "iwgetid -r";
 
-    private static string RunUnixCommand(string command)
+    public static string RunUnixCommand(string command)
     {
         var process = new Process();
         process.StartInfo.FileName = "/bin/bash";
@@ -25,7 +25,7 @@ public static class Commands
         return output;
     }
 
-    private static string RunCmdCommand(string command)
+    public static string RunCmdCommand(string command)
     {
         var process = new Process();
         process.StartInfo.FileName = "cmd.exe";
@@ -43,7 +43,7 @@ public static class Commands
     }
 
 
-    private static string RunPowerShellCommand(string command)
+    public static string RunPowerShellCommand(string command)
     {
         var process = new Process();
         process.StartInfo.FileName = "powershell.exe";
