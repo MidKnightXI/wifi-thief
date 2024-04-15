@@ -4,9 +4,11 @@ namespace WifiThief.Commands;
 
 public static class Commands
 {
-    public const string GetWifiNameCommand = "sudo wdutil info | grep 'SSID                 :'";
+    public const string GetWifiNameCommandMacos = "sudo wdutil info | grep 'SSID                 :'";
+    public const string GetWifiNameCommandWindows = "netsh wlan show interfaces | findstr 'SSID'";
+    public const string GetWifiNameCommandLinux = "iwgetid -r";
 
-        private static string RunUnixCommand(string command)
+    private static string RunUnixCommand(string command)
     {
         var process = new Process();
         process.StartInfo.FileName = "/bin/bash";
